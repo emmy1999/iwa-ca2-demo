@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const carpartSchema = mongoose.Schema ({
+const PartSchema = mongoose.Schema ({
  Manufacturer: {
    type:  String,
    required: true
@@ -19,4 +19,4 @@ Price: {
  },
 });
 
-module.exports = mongoose.model('carparts', carpartPostSchema);
+module.exports = mongoose.model('carparts',PartSchema);

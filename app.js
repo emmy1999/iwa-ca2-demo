@@ -6,20 +6,26 @@ require('dotenv').config()
 app.use(bodyParser.json());
 
 // Routes Declare
-const postsRoute = require('./routes/carparts');
+const partRouter = require('./routes/carparts')
 
-app.use('/carparts', postsRoute);
-//app.use('/user', userRoute)
+app.set('view engine', 'ejs')
 
-//Routes
+// routes aricle
+app.use('/part', partRouter)
+
+
+//Render html file
 app.get('/',  (req,res)=> {
-    res.send('We are on home');
-});
+   const parts = [{   
+  Manufacturer: 'Audi',
+  Model: 'Q5',
+  Part: 'Head Lamp',
+  Price: 243.56,
+  LastUpdated: new Date(),
+   }  ]
 
-
-
-
-
+    res.render('index' , {parts: parts})
+})
 
 
 // connecting to database
