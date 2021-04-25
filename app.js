@@ -9,9 +9,8 @@ app.use(bodyParser.json());
 const partRouter = require('./routes/carparts')
 
 app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: false}))
 
-// routes aricle
-app.use('/part', partRouter)
 
 
 //Render html file
@@ -24,12 +23,12 @@ app.get('/',  (req,res)=> {
   LastUpdated: new Date(),
    }  ]
 
-    res.render('index' , {parts: parts})
+    res.render('carparts/index' , {parts: parts})
 })
 
 
 // connecting to database
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true, })
 const dbc = mongoose.connection
 
 dbc.once('open', () => console.log('Connected to Database!'))
@@ -37,6 +36,6 @@ dbc.on('error', (error) => console.error(error))
 
 
 
-
+app.use('/carparts', partRouter)
 
 app.listen(4000, () => console.log('Server Started'))
