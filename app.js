@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const Part = require('./models/carpart-m')
 const bodyParser = require('body-parser');
 require('dotenv').config()
 app.use(bodyParser.json());
@@ -14,14 +15,8 @@ app.use(express.urlencoded({ extended: false}))
 
 
 //Render html file
-app.get('/',  (req,res)=> {
-   const parts = [{   
-  Manufacturer: 'Audi',
-  Model: 'Q5',
-  Part: 'Head Lamp',
-  Price: 243.56,
-  LastUpdated: new Date(),
-   }  ]
+app.get('/', async  (req,res)=> {
+   const parts = await Part.find();
 
     res.render('carparts/index' , {parts: parts})
 })

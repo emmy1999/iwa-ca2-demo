@@ -14,7 +14,7 @@ Part:{
    required: true
  },
 Price: {
-   type:  Double,
+   type:  String,
    required: true
  },
 });
